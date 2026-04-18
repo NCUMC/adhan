@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Time Adjustment - NCU Muslim Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                        },
+                        neutral: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fafaf9; color: #1c1917; }
+        .tab-btn.active { border-bottom-width: 4px; border-color: #0f766e; color: #0f766e; font-weight: 600; }
+        [data-lang] { display: none; }
+        html[lang="id"] [data-lang="id"] { display: block; }
+        html[lang="id"] span[data-lang="id"] { display: inline; }
+        html[lang="en"] [data-lang="en"] { display: block; }
+        html[lang="en"] span[data-lang="en"] { display: inline; }
+        .arabic { font-family: "Amiri", serif; direction: rtl; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+<nav class="bg-brand-900 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-xl">🕌</span>
+            <div class="text-sm md:text-xl font-bold tracking-wider">NCU Muslim Club</div>
+        </div>
+        <div class="flex items-center gap-2 bg-brand-800 p-1 rounded-lg">
+            <button onclick="setLanguage('en')" id="btn-en" class="px-3 py-1 rounded text-xs font-bold transition-all bg-brand-500 text-white">EN</button>
+            <button onclick="setLanguage('id')" id="btn-id" class="px-3 py-1 rounded text-xs font-bold transition-all text-brand-300">ID</button>
+        </div>
+    </div>
+</nav>
+
+<header class="max-w-6xl mx-auto px-4 py-12 md:py-16 text-center">
+    <div class="inline-block px-4 py-1 bg-brand-100 text-brand-700 rounded-full text-xs font-bold mb-4">
+        <span data-lang="id">Pengumuman Resmi untuk Komunitas NCU</span>
+        <span data-lang="en">Official Announcement for NCU Community</span>
+    </div>
+    <h1 class="text-3xl md:text-5xl font-extrabold text-neutral-900 mb-6 tracking-tight">
+        <span data-lang="id">Standard Baru Jadwal Sholat Jama'ah</span>
+        <span data-lang="en">New Congregational Prayer Standard</span>
+    </h1>
+    <p class="text-md md:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+        <span data-lang="id">Disampaikan oleh <strong>Khadim NCU Muslim Club</strong>, pengumuman ini merinci transisi ke standar <strong>Muslim World League (MWL)</strong> guna mengoptimalkan ibadah di kampus.</span>
+        <span data-lang="en">Presented by <strong>Khadim NCU Muslim Club</strong>, this announcement details the transition to the <strong>MWL</strong> standard to optimize worship on campus.</span>
+    </p>
+</header>
+
+<!-- Spiritual Guidance Section -->
+<section class="max-w-5xl mx-auto px-4 py-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 flex flex-col justify-center">
+            <div class="arabic text-2xl text-brand-700 mb-4 text-center">إِنَّ ٱلصَّلَوٰةَ كَانَتْ عَلَى ٱلْمُؤْمِنِينَ كِتَـٰبًۭا مَّوْقُوتًۭا</div>
+            <p class="text-sm italic text-neutral-600 text-center">
+                <span data-lang="id">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman." (QS. An-Nisa: 103)</span>
+                <span data-lang="en">"Indeed, prayer has been decreed upon the believers a decree of specified times." (An-Nisa: 103)</span>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 flex flex-col justify-center">
+            <div class="arabic text-2xl text-brand-700 mb-4 text-center">وَٱعْتَصِمُوا۟ بِحَبْلِ ٱللَّهِ جَمِيعًۭا وَلَا تَفَرَّقُوا۟</div>
+            <p class="text-sm italic text-neutral-600 text-center">
+                <span data-lang="id">"Dan berpegang teguhlah kamu semuanya pada tali (agama) Allah, dan janganlah kamu bercerai berai..." (QS. Ali 'Imran: 103)</span>
+                <span data-lang="en">"And hold firmly to the rope of Allah all together and do not become divided..." (Ali 'Imran: 103)</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden">
+        <div class="flex border-b border-neutral-200 overflow-x-auto bg-neutral-50">
+            <button class="tab-btn active flex-1 py-4 px-6 text-neutral-500 whitespace-nowrap text-xs md:text-sm" data-target="panel-calc">
+                <span data-lang="id">1. Kalkulasi</span><span data-lang="en">1. Calculation</span>
+            </button>
+            <button class="tab-btn flex-1 py-4 px-6 text-neutral-500 whitespace-nowrap text-xs md:text-sm" data-target="panel-iqomah">
+                <span data-lang="id">2. Jeda Iqomah</span><span data-lang="en">2. Iqomah Interval</span>
+            </button>
+            <button class="tab-btn flex-1 py-4 px-6 text-neutral-500 whitespace-nowrap text-xs md:text-sm" data-target="panel-dhuhr">
+                <span data-lang="id">3. Dzuhur</span><span data-lang="en">3. Dhuhr</span>
+            </button>
+            <button class="tab-btn flex-1 py-4 px-6 text-neutral-500 whitespace-nowrap text-xs md:text-sm" data-target="panel-maghrib">
+                <span data-lang="id">4. Maghrib</span><span data-lang="en">4. Maghrib</span>
+            </button>
+            <button class="tab-btn flex-1 py-4 px-6 text-neutral-500 whitespace-nowrap text-xs md:text-sm" data-target="panel-asr">
+                <span data-lang="id">5. Mazhab</span><span data-lang="en">5. Juristic</span>
+            </button>
+        </div>
+
+        <div class="p-6 md:p-10 min-h-[300px] flex items-center">
+            <div id="panel-calc" class="tab-panel w-full">
+                <h3 class="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">📐 MWL Standard</h3>
+                <p class="text-neutral-600 leading-relaxed mb-6">
+                    <span data-lang="id">Kita mengadopsi standar <strong>MWL (Fajr 18°, Isha 17°)</strong>. Ini memberikan margin aman untuk Subuh dan Imsak, serta selaras dengan referensi organisasi besar di Taiwan.</span>
+                    <span data-lang="en">We adopt the <strong>MWL (Fajr 18°, Isha 17°)</strong> standard. This provides a safe margin for Fajr and Imsak, aligning with major Muslim organizations in Taiwan.</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="https://www.instagram.com/pcinu_taiwan/" target="_blank" class="flex items-center gap-3 p-3 bg-brand-50 rounded-lg border border-brand-100 hover:bg-brand-100 transition-colors">
+                        <span class="text-xl">📸</span>
+                        <div class="text-xs">
+                            <div class="font-bold text-brand-900">PCINU Taiwan</div>
+                            <div class="text-brand-600">@pcinu_taiwan</div>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/pcimtaiwan/" target="_blank" class="flex items-center gap-3 p-3 bg-brand-50 rounded-lg border border-brand-100 hover:bg-brand-100 transition-colors">
+                        <span class="text-xl">📸</span>
+                        <div class="text-xs">
+                            <div class="font-bold text-brand-900">PCIM Taiwan</div>
+                            <div class="text-brand-600">@pcimtaiwan</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div id="panel-iqomah" class="tab-panel w-full hidden">
+                <h3 class="text-2xl font-bold text-neutral-800 mb-6 flex items-center gap-2">🔔 Adzan to Iqomah</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-neutral-50 rounded-xl border border-neutral-200">
+                        <div class="text-brand-700 font-bold">Subuh / Fajr</div>
+                        <div class="text-2xl font-black">20 min</div>
+                    </div>
+                    <div class="p-4 bg-brand-50 rounded-xl border border-brand-200">
+                        <div class="text-brand-700 font-bold">Maghrib</div>
+                        <div class="text-2xl font-black text-brand-900">15 min</div>
+                        <div class="text-[10px] text-brand-600 italic mt-1">
+                            <span data-lang="id">*Berubah dari 20m</span>
+                            <span data-lang="en">*Changed from 20m</span>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-neutral-50 rounded-xl border border-neutral-200">
+                        <div class="text-brand-700 font-bold">Ashar & Isya</div>
+                        <div class="text-2xl font-black">10 min</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="panel-dhuhr" class="tab-panel w-full hidden">
+                <h3 class="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">⏱️ Fixed Iqomah</h3>
+                <p class="text-lg text-neutral-600 leading-relaxed">
+                    <span data-lang="id">Iqomah Dzuhur dimulai <strong>minimal pukul 12:15 PM</strong>. Penyesuaian ini agar teman-teman yang selesai kelas pukul 12:00 PM sempat bergabung dalam jama'ah.</span>
+                    <span data-lang="en">Dhuhr Iqomah starts at a <strong>minimum of 12:15 PM</strong>. This ensures students finishing classes at 12:00 PM have time to join the congregation.</span>
+                </p>
+            </div>
+
+            <div id="panel-maghrib" class="tab-panel w-full hidden">
+                <h3 class="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">🌅 3 Min Buffer (Ihtiyat)</h3>
+                <p class="text-lg text-neutral-600 leading-relaxed">
+                    <span data-lang="id">Kami menambahkan <strong>3 menit waktu aman (Ihtiyat)</strong> untuk Maghrib. Ini untuk menjamin keabsahan waktu buka puasa dan sholat setelah matahari terbenam secara astronomis.</span>
+                    <span data-lang="en">We add a <strong>3-minute safety buffer (Ihtiyat)</strong> for Maghrib. This is to ensure the validity of fast-breaking and prayer time after astronomical sunset.</span>
+                </p>
+            </div>
+
+            <div id="panel-asr" class="tab-panel w-full hidden">
+                <h3 class="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">⚖️ Shafi'i / Jumhur</h3>
+                <p class="text-neutral-600 leading-relaxed">
+                    <span data-lang="id">Kita menggunakan metode Syafi'i untuk Ashar. Saudara-saudara bermazhab Hanafi telah setuju demi menjaga persatuan jama'ah kampus dan mencegah Dzuhur yang terlalu mundur.</span>
+                    <span data-lang="en">We use the Shafi'i method for Asr. Our Hanafi brothers have agreed for the sake of community unity and to prevent Dhuhr from being pushed too late.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Considerations for the Change Section -->
+<section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-neutral-800">
+            <span data-lang="id">Pertimbangan Perubahan</span>
+            <span data-lang="en">Considerations for the Change</span>
+        </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
+            <div class="text-2xl mb-3">🌙</div>
+            <h4 class="font-bold text-neutral-800 mb-2">
+                <span data-lang="id">Akurasi Fajar</span>
+                <span data-lang="en">Fajr Accuracy</span>
+            </h4>
+            <p class="text-xs text-neutral-600">
+                <span data-lang="id">Standard 18° MWL memberikan kepastian lebih kuat untuk validitas Imsak dan Subuh.</span>
+                <span data-lang="en">The 18° MWL standard provides stronger certainty for the validity of Imsak and Fajr.</span>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
+            <div class="text-2xl mb-3">🎓</div>
+            <h4 class="font-bold text-neutral-800 mb-2">
+                <span data-lang="id">Jadwal Kuliah</span>
+                <span data-lang="en">Academic Schedule</span>
+            </h4>
+            <p class="text-xs text-neutral-600">
+                <span data-lang="id">Penetapan 12:15 PM untuk Dzuhur adalah kompromi bagi mahasiswa yang selesai kelas pukul 12.</span>
+                <span data-lang="en">Fixing Dhuhr at 12:15 PM is a compromise for students finishing classes at 12 PM.</span>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
+            <div class="text-2xl mb-3">🤝</div>
+            <h4 class="font-bold text-neutral-800 mb-2">
+                <span data-lang="id">Kesatuan Komunitas</span>
+                <span data-lang="en">Community Unity</span>
+            </h4>
+            <p class="text-xs text-neutral-600">
+                <span data-lang="id">Menyelaraskan waktu dengan PCINU/PCIM agar memudahkan koordinasi acara lintas komunitas.</span>
+                <span data-lang="en">Aligning with PCINU/PCIM to facilitate coordination of cross-community events.</span>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
+            <div class="text-2xl mb-3">📍</div>
+            <h4 class="font-bold text-neutral-800 mb-2">
+                <span data-lang="id">Konteks Taiwan</span>
+                <span data-lang="en">Taiwan Context</span>
+            </h4>
+            <p class="text-xs text-neutral-600">
+                <span data-lang="id">Menjamin kompatibilitas dengan masjid-masjid lokal sambil tetap menjaga standar fiqih kita.</span>
+                <span data-lang="en">Ensuring compatibility with local mosques while maintaining our fiqh standards.</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW TO RELOAD / CLEAR CACHE SECTION -->
+<section class="max-w-6xl mx-auto px-4 py-12 border-t border-neutral-200">
+    <div class="bg-neutral-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+        <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-brand-500">
+                <span data-lang="id">Cara Update (Clear Cache)</span>
+                <span data-lang="en">How to Update (Clear Cache)</span>
+            </h2>
+            <p class="text-neutral-400 mb-8 max-w-2xl">
+                <span data-lang="id">Untuk memastikan jadwal terbaru muncul di aplikasi Adhan, ikuti panduan berikut sesuai perangkat Anda:</span>
+                <span data-lang="en">To ensure the latest schedule appears in the Adhan app, follow these guides according to your device:</span>
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Desktop -->
+                <div class="bg-neutral-800 p-6 rounded-2xl border border-neutral-700">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">💻 Desktop</h3>
+                    <ul class="text-sm space-y-3 text-neutral-300">
+                        <li>
+                            <strong class="text-white block">Windows:</strong> 
+                            <span data-lang="id">Tekan <code>Ctrl</code> + <code>F5</code></span>
+                            <span data-lang="en">Press <code>Ctrl</code> + <code>F5</code></span>
+                        </li>
+                        <li>
+                            <strong class="text-white block">macOS (Safari/Chrome):</strong> 
+                            <span data-lang="id">Tekan <code>Cmd</code> + <code>Shift</code> + <code>R</code></span>
+                            <span data-lang="en">Press <code>Cmd</code> + <code>Shift</code> + <code>R</code></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Android -->
+                <div class="bg-neutral-800 p-6 rounded-2xl border border-neutral-700">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">🤖 Android (Chrome)</h3>
+                    <p class="text-xs text-neutral-400 mb-4">
+                        <span data-lang="id">Buka menu (tiga titik) > Riwayat > Hapus data browsing > Pilih "Cached images and files".</span>
+                        <span data-lang="en">Go to Menu (three dots) > History > Clear browsing data > Select "Cached images and files".</span>
+                    </p>
+                    <a href="https://support.google.com/chrome/answer/2392709" target="_blank" class="text-brand-500 text-xs hover:underline flex items-center gap-1">
+                        Google Support Guide ↗
+                    </a>
+                </div>
+
+                <!-- Mobile iOS -->
+                <div class="bg-neutral-800 p-6 rounded-2xl border border-neutral-700">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">🍎 iPhone/iPad (Safari)</h3>
+                    <p class="text-xs text-neutral-400 mb-4">
+                        <span data-lang="id">Settings > Safari > Clear History and Website Data.</span>
+                        <span data-lang="en">Settings > Safari > Clear History and Website Data.</span>
+                    </p>
+                    <a href="https://support.apple.com/en-us/HT201265" target="_blank" class="text-brand-500 text-xs hover:underline flex items-center gap-1">
+                        Apple Support Guide ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-brand-900/50 border border-brand-500/30 rounded-xl">
+                <p class="text-xs text-brand-200">
+                    <span data-lang="id">💡 <strong>Tips Firefox:</strong> Gunakan menu Setelan > Privasi & Keamanan > Bersihkan Data. <a href="https://support.mozilla.org/en-US/kb/how-clear-firefox-cache" target="_blank" class="underline">Panduan Firefox ↗</a></span>
+                    <span data-lang="en">💡 <strong>Firefox Tip:</strong> Use Settings > Privacy & Security > Clear Data. <a href="https://support.mozilla.org/en-US/kb/how-clear-firefox-cache" target="_blank" class="underline">Firefox Guide ↗</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-4 py-8">
+    <div class="bg-brand-50 border-l-4 border-brand-500 p-8 rounded-r-2xl">
+        <h2 class="text-xl font-bold text-brand-900 mb-4">
+            <span data-lang="id">Landasan Hadits</span>
+            <span data-lang="en">Prophetic Foundation</span>
+        </h2>
+        <p class="text-neutral-700 italic leading-relaxed mb-4">
+            <span data-lang="id">"Shalat berjamaah lebih utama dua puluh tujuh derajat daripada shalat sendirian." (HR. Bukhari & Muslim)</span>
+            <span data-lang="en">"Prayer in congregation is twenty-seven times more rewarding than prayer performed individually." (Bukhari & Muslim)</span>
+        </p>
+        <p class="text-sm text-neutral-600">
+            <span data-lang="id">NCUMC berupaya memfasilitasi keutamaan ini dengan mengatur jadwal iqomah yang inklusif bagi seluruh mahasiswa.</span>
+            <span data-lang="en">NCUMC strives to facilitate this reward by arranging inclusive iqomah schedules for all students.</span>
+        </p>
+    </div>
+</section>
+
+<section id="implementation" class="bg-brand-900 py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-4">Implementation</h2>
+        <div class="bg-brand-800 p-8 rounded-2xl inline-block w-full max-sm shadow-xl border border-brand-700">
+            <div class="text-5xl mb-4">📱</div>
+            <h3 class="text-2xl font-bold mb-1">Official Adhan App</h3>
+            <div class="text-brand-400 text-xs mb-6 tracking-widest uppercase">NCU Muslim Club</div>
+            <a href="https://ncumc.github.io/adhan" target="_blank" class="inline-block bg-white text-brand-900 font-bold py-3 px-8 rounded-full hover:bg-brand-50 transition-all">
+                Open Adhan PWA
+            </a>
+            <p class="mt-6 text-brand-300 text-xs italic">
+                <span data-lang="id">*Mohon reload halaman PWA untuk update terbaru.</span>
+                <span data-lang="en">*Please reload the PWA for latest updates.</span>
+            </p>
+        </div>
+        <div class="mt-10 text-brand-400 font-mono text-sm">@ncu.muslimclub</div>
+    </div>
+</section>
+
+<footer class="bg-neutral-900 text-neutral-500 py-12 text-center text-xs">
+    <div class="max-w-xl mx-auto px-4">
+        <p class="mb-2 font-bold text-brand-500 underline underline-offset-4 decoration-brand-700">Khadim NCU Muslim Club (NCUMC)</p>
+        <p>
+            <span data-lang="id">Ditujukan khusus bagi komunitas Muslim di National Central University (NCU).</span>
+            <span data-lang="en">Exclusively for the Muslim community at National Central University (NCU).</span>
+        </p>
+    </div>
+</footer>
+
+<script>
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.getElementById('btn-id').className = lang === 'id' ? 'px-3 py-1 rounded text-xs font-bold bg-brand-500 text-white' : 'px-3 py-1 rounded text-xs font-bold text-brand-300';
+        document.getElementById('btn-en').className = lang === 'en' ? 'px-3 py-1 rounded text-xs font-bold bg-brand-500 text-white' : 'px-3 py-1 rounded text-xs font-bold text-brand-300';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setLanguage('en');
+
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.add('hidden'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-target')).classList.remove('hidden');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
